@@ -62,8 +62,11 @@ WikiWidgets = {
 	},
 
 	load: function ( wikiwidget ) {
-		mw.loader.load( '//commons.wikimedia.org/w/index.php?title=MediaWiki:WikiWidget-' + wikiwidget + '.js&action=raw&ctype=text/javascript' );
-		mw.loader.load( '//commons.wikimedia.org/w/index.php?title=MediaWiki:WikiWidget-' + wikiwidget + '.css&action=raw&ctype=text/css', 'text/css' );
+		if ( /^[^&<>=%#]*$/.test( wikiwidget ) ) {
+			wikiwidget = encodeURIComponent( wikiwidget );
+			mw.loader.load( '//commons.wikimedia.org/w/index.php?title=MediaWiki:WikiWidget-' + wikiwidget + '.js&action=raw&ctype=text/javascript' );
+			mw.loader.load( '//commons.wikimedia.org/w/index.php?title=MediaWiki:WikiWidget-' + wikiwidget + '.css&action=raw&ctype=text/css', 'text/css' );
+		}
 	}
 }
 
